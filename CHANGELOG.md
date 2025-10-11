@@ -1,3 +1,30 @@
+## [1.1.0] - 2025-10-11
+
+### 🚀 Features
+
+- Create utils
+- Move types to folder
+- Add notion-rehype as submodule
+- Link the local notion-rehype pacakge
+
+### 🐛 Bug Fixes
+
+- Update imports
+
+### 🚜 Refactor
+
+- Move and update free function to file
+- Remove .js extension from imports
+
+### 🎨 Styling
+
+- Run Biome
+
+### ⚙️ Miscellaneous Tasks
+
+- Add CHANGELOG
+- Update some deps
+- *(notion-rehype)* Update submodule refs
 ## [1.0.0] - 2025-10-05
 
 ### 🚀 Features
