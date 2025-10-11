@@ -14,7 +14,7 @@ import type {
 } from "../types/index.js";
 import { awaitAll } from "../utils/promise.js";
 import type { buildProcessor } from "./factory.js";
-import { listBlocks } from "../utils/blocks.js";
+import { listBlocks } from "../blocks.js";
 
 export class NotionPageRenderer {
   private readonly imagePaths: string[] = [];

@@ -11,14 +11,11 @@ import { dim } from "kleur/colors";
 
 import { propertiesSchemaForDataSource } from "./database-properties.js";
 import { VIRTUAL_CONTENT_ROOT } from "./image.js";
-import {
-  buildProcessor,
-  NotionPageRenderer,
-  type RehypePlugin,
-} from "./renderer/index.js";
+import { NotionPageRenderer } from "./renderer/index.js";
 import { notionPageSchema } from "./schemas/page.js";
 import * as transformedPropertySchema from "./schemas/transformed-properties.js";
 import type { ClientOptions } from "./types/index.js";
+import { buildProcessor, type RehypePlugin } from "./renderer/factory.js";
 
 export interface NotionLoaderOptions
   extends Pick<

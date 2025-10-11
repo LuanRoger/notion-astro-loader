@@ -3,8 +3,8 @@ import {
   iteratePaginatedAPI,
   type Client,
 } from "@notionhq/client";
-import { awaitAll } from "./promise";
-import type { FileObject } from "../types";
+import { awaitAll } from "./utils/promise";
+import type { FileObject } from "./types";
 
 /**
  * Return a generator that yields all blocks in a Notion page, recursively.
