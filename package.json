@@ -62,7 +62,6 @@
     "@types/fs-extra": "^11.0.4",
     "@types/slug": "^5.0.9",
     "astro": "5.14.1",
-    "crossrm": "^1.0.0",
     "vfile": "^6.0.3"
   }
 }

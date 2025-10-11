@@ -1,4 +1,5 @@
 import type { Client, isFullDataSource, isFullPage } from "@notionhq/client";
+import type { MarkdownHeading } from "astro";
 
 /**
  * @module
@@ -9,6 +10,14 @@ import type { Client, isFullDataSource, isFullPage } from "@notionhq/client";
 type Asserts<Function> = Function extends (input: any) => input is infer Type
   ? Type
   : never;
+
+export interface RenderedNotionEntry {
+  html: string;
+  metadata: {
+    imagePaths: string[];
+    headings: MarkdownHeading[];
+  };
+}
 
 export type ClientOptions = NonNullable<
   ConstructorParameters<typeof Client>[0]

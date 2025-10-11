@@ -24,7 +24,6 @@ export function rehypeImages() {
           if (imagePaths?.includes(node.properties.src)) {
             const { ...props } = node.properties;
 
-            // Initialize or increment occurrence count for this image
             const index = imageOccurrenceMap.get(node.properties.src) || 0;
             imageOccurrenceMap.set(node.properties.src, index + 1);
 

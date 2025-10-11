@@ -1,5 +1,5 @@
-import { dateToDateObjects, richTextToPlainText } from "../format.js";
-import * as propertyType from "./raw-properties.js";
+import { dateToDateObjects, richTextToPlainText } from "../format";
+import * as propertyType from "./raw-properties";
 
 export const number = propertyType.number.transform(
   (property) => property.number,

@@ -8,4 +8,5 @@ export default defineConfig({
   tsconfig: "tsconfig.build.json",
   format: "esm",
   sourcemap: true,
+  external: ["astro", "astro:assets"],
 });

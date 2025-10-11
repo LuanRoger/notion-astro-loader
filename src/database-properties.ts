@@ -1,7 +1,7 @@
 import type { Client } from "@notionhq/client";
 import { z } from "astro/zod";
-import * as rawPropertyType from "./schemas/raw-properties.js";
-import type { DataSourcePropertyConfigResponse } from "./types.js";
+import * as rawPropertyType from "./schemas/raw-properties";
+import type { DataSourcePropertyConfigResponse } from "./types/index";
 
 export async function propertiesSchemaForDataSource(
   client: Client,
