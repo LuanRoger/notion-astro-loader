@@ -3,7 +3,7 @@ import type { AstroIntegrationLogger } from "astro";
 import type { ParseDataOptions } from "astro/loaders";
 import * as fse from "fs-extra";
 import { dim } from "kleur/colors";
-
+import { listBlocks } from "../blocks";
 import { fileToUrl } from "../format";
 import { saveImageFromAWS, transformImagePathForCover } from "../image";
 import type {
@@ -14,7 +14,6 @@ import type {
 } from "../types/index";
 import { awaitAll } from "../utils/promise";
 import type { buildProcessor } from "./factory";
-import { listBlocks } from "../blocks";
 
 export class NotionPageRenderer {
   private readonly imagePaths: string[] = [];
@@ -36,7 +35,7 @@ export class NotionPageRenderer {
     client: Client,
     page: PageObjectResponse,
     imageSavePath: string,
-    logger: AstroIntegrationLogger
+    logger: AstroIntegrationLogger,
   ) {
     this.logger = logger.fork(`${logger.label}/render`);
     this.client = client;
@@ -49,14 +48,14 @@ export class NotionPageRenderer {
    */
   async getPageData(
     transformCoverImage = false,
-    rootAlias = "src"
+    rootAlias = "src",
   ): Promise<ParseDataOptions<NotionPageData>> {
     const { page } = this;
     let cover = page.cover;
     // transform cover image file
     if (cover && transformCoverImage && cover.type === "file") {
       const transformedUrl = `${rootAlias}/${transformImagePathForCover(
-        await this.#fetchImage(cover)
+        await this.#fetchImage(cover),
       )}`;
       cover = {
         ...cover,
@@ -86,13 +85,13 @@ export class NotionPageRenderer {
    * This is created once for all pages then shared.
    */
   async render(
-    process: ReturnType<typeof buildProcessor>
+    process: ReturnType<typeof buildProcessor>,
   ): Promise<RenderedNotionEntry | undefined> {
     this.logger.debug("Rendering page");
 
     try {
       const blocks = await awaitAll(
-        listBlocks(this.client, this.page.id, this.#fetchImage)
+        listBlocks(this.client, this.page.id, this.#fetchImage),
       );
 
       if (this.imageAnalytics.download > 0 || this.imageAnalytics.cached > 0) {
@@ -101,7 +100,7 @@ export class NotionPageRenderer {
             `Found ${this.imageAnalytics.download} images to download`,
             this.imageAnalytics.cached > 0 &&
               dim(`${this.imageAnalytics.cached} already cached`),
-          ].join(" ")
+          ].join(" "),
         );
       }
 
@@ -129,7 +128,7 @@ export class NotionPageRenderer {
    * @returns Local path to the image, or undefined if the image could not be fetched.
    */
   #fetchImage: (imageFileObject: FileObject) => Promise<string> = async (
-    imageFileObject
+    imageFileObject,
   ) => {
     try {
       if (imageFileObject.type === "external") {
@@ -148,7 +147,7 @@ export class NotionPageRenderer {
           tag: (type) => {
             this.imageAnalytics[type]++;
           },
-        }
+        },
       );
       this.imagePaths.push(imageUrl);
       return imageUrl;

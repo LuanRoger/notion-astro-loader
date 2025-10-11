@@ -1,10 +1,10 @@
 import {
+  type Client,
   isFullBlock,
   iteratePaginatedAPI,
-  type Client,
 } from "@notionhq/client";
-import { awaitAll } from "./utils/promise";
 import type { FileObject } from "./types";
+import { awaitAll } from "./utils/promise";
 
 /**
  * Return a generator that yields all blocks in a Notion page, recursively.
@@ -14,7 +14,7 @@ import type { FileObject } from "./types";
 export async function* listBlocks(
   client: Client,
   blockId: string,
-  fetchImage: (file: FileObject) => Promise<string>
+  fetchImage: (file: FileObject) => Promise<string>,
 ) {
   for await (const block of iteratePaginatedAPI(client.blocks.children.list, {
     block_id: blockId,
