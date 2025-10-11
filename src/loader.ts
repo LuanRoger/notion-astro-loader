@@ -15,10 +15,10 @@ import {
   buildProcessor,
   NotionPageRenderer,
   type RehypePlugin,
-} from "./render.js";
+} from "./renderer/index.js";
 import { notionPageSchema } from "./schemas/page.js";
 import * as transformedPropertySchema from "./schemas/transformed-properties.js";
-import type { ClientOptions } from "./types.js";
+import type { ClientOptions } from "./types/index.js";
 
 export interface NotionLoaderOptions
   extends Pick<
