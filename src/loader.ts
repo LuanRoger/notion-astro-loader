@@ -9,13 +9,13 @@ import type { RehypePlugins } from "astro";
 import type { Loader } from "astro/loaders";
 import { dim } from "kleur/colors";
 
-import { propertiesSchemaForDataSource } from "./database-properties.js";
-import { VIRTUAL_CONTENT_ROOT } from "./image.js";
-import { NotionPageRenderer } from "./renderer/index.js";
-import { notionPageSchema } from "./schemas/page.js";
-import * as transformedPropertySchema from "./schemas/transformed-properties.js";
-import type { ClientOptions } from "./types/index.js";
-import { buildProcessor, type RehypePlugin } from "./renderer/factory.js";
+import { propertiesSchemaForDataSource } from "./database-properties";
+import { VIRTUAL_CONTENT_ROOT } from "./image";
+import { NotionPageRenderer } from "./renderer/index";
+import { notionPageSchema } from "./schemas/page";
+import * as transformedPropertySchema from "./schemas/transformed-properties";
+import type { ClientOptions } from "./types/index";
+import { buildProcessor, type RehypePlugin } from "./renderer/factory";
 
 export interface NotionLoaderOptions
   extends Pick<

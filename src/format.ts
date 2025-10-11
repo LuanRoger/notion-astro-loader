@@ -1,6 +1,6 @@
 import { getImage } from "astro:assets";
 import type { GetImageResult } from "astro";
-import type { FileObject } from "./types/index.js";
+import type { FileObject } from "./types/index";
 
 /**
  * Extract a plain string from a list of rich text items.

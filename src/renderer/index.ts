@@ -4,17 +4,17 @@ import type { ParseDataOptions } from "astro/loaders";
 import * as fse from "fs-extra";
 import { dim } from "kleur/colors";
 
-import { fileToUrl } from "../format.js";
-import { saveImageFromAWS, transformImagePathForCover } from "../image.js";
+import { fileToUrl } from "../format";
+import { saveImageFromAWS, transformImagePathForCover } from "../image";
 import type {
   FileObject,
   NotionPageData,
   PageObjectResponse,
   RenderedNotionEntry,
-} from "../types/index.js";
-import { awaitAll } from "../utils/promise.js";
-import type { buildProcessor } from "./factory.js";
-import { listBlocks } from "../blocks.js";
+} from "../types/index";
+import { awaitAll } from "../utils/promise";
+import type { buildProcessor } from "./factory";
+import { listBlocks } from "../blocks";
 
 export class NotionPageRenderer {
   private readonly imagePaths: string[] = [];

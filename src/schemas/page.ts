@@ -1,5 +1,5 @@
 import { z } from "astro/zod";
-import { externalPropertyResponse, filePropertyResponse } from "./file.js";
+import { externalPropertyResponse, filePropertyResponse } from "./file";
 
 export const pageObjectSchema = z.object({
   icon: z
