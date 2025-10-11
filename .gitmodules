@@ -1,0 +1,3 @@
+[submodule "notion-rehype"]
+	path = notion-rehype
+	url = git@github.com:Mongkii/notion-rehype.git

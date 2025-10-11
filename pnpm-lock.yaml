@@ -20,6 +20,9 @@ importers:
       kleur:
         specifier: ^4.1.5
         version: 4.1.5
+      notion-rehype:
+        specifier: link:notion-rehype
+        version: link:notion-rehype
       notion-rehype-k:
         specifier: ^1.1.6
         version: 1.1.6
