@@ -1,7 +1,6 @@
-import { addCaptionToHast } from './caption';
-import { h, getNotionFileUrlAndAttr, notionPrefixFactory } from '../utils';
-
-import { BlockType, type Context } from '../types';
+import { BlockType, type Context } from "../types";
+import { getNotionFileUrlAndAttr, h, notionPrefixFactory } from "../utils";
+import { addCaptionToHast } from "./caption";
 
 const handler = (context: Context, block: any) => {
   const data = block[BlockType.file];
@@ -9,16 +8,18 @@ const handler = (context: Context, block: any) => {
 
   let lastSlashIndex = 0;
   for (let i = url.length - 1; i > -1; i -= 1) {
-    if (url[i] === '/') {
+    if (url[i] === "/") {
       lastSlashIndex = i;
       break;
     }
   }
-  const fileName = url.slice(lastSlashIndex + 1) || 'Unknown File';
+  const fileName = url.slice(lastSlashIndex + 1) || "Unknown File";
 
   const blockClass = notionPrefixFactory(context)(BlockType.file);
 
-  const hast = h('div', { className: [blockClass] }, [h('a', { src: url, ...fileAttr }, [h('text', fileName)])]);
+  const hast = h("div", { className: [blockClass] }, [
+    h("a", { src: url, ...fileAttr }, [h("text", fileName)]),
+  ]);
   addCaptionToHast(context, hast, data.caption);
 
   return hast;

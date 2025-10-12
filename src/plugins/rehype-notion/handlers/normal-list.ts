@@ -1,8 +1,7 @@
-import { addTasksToAddRichTexts } from './rich-text';
-import { addTasksToAddDirectChildren } from './children';
-import { h, getColorClassName, addBlockIdToHast, hasChildren } from '../utils';
-
-import type { Context } from '../types';
+import type { Context } from "../types";
+import { addBlockIdToHast, getColorClassName, h, hasChildren } from "../utils";
+import { addTasksToAddDirectChildren } from "./children";
+import { addTasksToAddRichTexts } from "./rich-text";
 
 const getListItemHast = (context: Context, block: any) => {
   const data = block[block.type];
@@ -10,7 +9,7 @@ const getListItemHast = (context: Context, block: any) => {
   const colorClassName = getColorClassName(data.color);
   const className = colorClassName ? [colorClassName] : undefined;
 
-  const hast = h('li', { className }, []);
+  const hast = h("li", { className }, []);
 
   addTasksToAddDirectChildren(context, hast, data.children);
   addTasksToAddRichTexts({
@@ -29,7 +28,7 @@ const getListItemHast = (context: Context, block: any) => {
 const handler = (context: Context, block: any) => {
   const blockType = block.type;
 
-  const tagName = blockType === 'bulleted_list' ? 'ul' : 'ol';
+  const tagName = blockType === "bulleted_list" ? "ul" : "ol";
   const hast = h(tagName, []);
 
   const listItems = block[blockType];

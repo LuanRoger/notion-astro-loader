@@ -1,11 +1,11 @@
-import type { Root, RootContent, Element, ElementContent, Text } from "hast";
+import type { Element, ElementContent, Root, RootContent, Text } from "hast";
 
 import type { Context } from "./types";
 
 export function h(
   tagName: string,
   properties: Record<string, any>,
-  children: ElementContent[]
+  children: ElementContent[],
 ): Element;
 export function h(tagName: string, children: ElementContent[]): Element;
 export function h(root: null, children: RootContent[]): Root;
@@ -35,7 +35,7 @@ export const notionPrefixFactory = (context: Context) => {
 
 export const getNotionFileUrlAndAttr = (
   context: Context,
-  data: { type: string; [type: string]: string }
+  data: { type: string; [type: string]: string },
 ) => {
   const notionPrefix = notionPrefixFactory(context);
   const attrName = `data-${notionPrefix("file-type")}`;
@@ -50,7 +50,7 @@ export const hasChildren = (data: any) => (data.children?.length || 0) > 0;
 export const addBlockIdToHast = (
   context: Context,
   block: any,
-  hast: Element | Text
+  hast: Element | Text,
 ) => {
   if (hast.type !== "element" || !context.options.enableBlockId || !block.id) {
     return;
@@ -71,7 +71,7 @@ export const getColorClassName = (color: string) => {
 
 export const objAssign = <T extends object, U>(
   props: T | undefined,
-  newProps: U
+  newProps: U,
 ): T & U => {
   return Object.assign((props || {}) as T, newProps);
 };
@@ -147,7 +147,7 @@ export const groupBlocks = (blocks: any[] | undefined) => {
 
 export const getFileDetails = (
   context: Context,
-  block: any
+  block: any,
 ): { url?: string; attr?: object } => {
   if (!block) return {};
 

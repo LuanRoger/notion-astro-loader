@@ -1,7 +1,7 @@
-import { h } from '../utils';
+import { h } from "../utils";
 
 const handler = () => {
-  const hast = h('hr', []);
+  const hast = h("hr", []);
 
   return hast;
 };

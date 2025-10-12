@@ -1,10 +1,9 @@
-import { addCaptionToHast } from './caption';
-import { getFileDetails, h, notionPrefixFactory } from '../utils';
-
-import type { Context } from '../types';
+import type { Context } from "../types";
+import { getFileDetails, h, notionPrefixFactory } from "../utils";
+import { addCaptionToHast } from "./caption";
 
 const YOUTUBE_URL_REGEX =
-  /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?$/;
+  /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|live\/|v\/)?)([\w-]+)(\S+)?$/;
 
 const handler = (context: Context, block: any) => {
   const data = block[block.type];
@@ -12,14 +11,19 @@ const handler = (context: Context, block: any) => {
 
   const blockClass = notionPrefixFactory(context)(block.type);
 
-  const youtubeMatch = data.type === 'file' ? null : YOUTUBE_URL_REGEX.exec(data.external.url);
+  const youtubeMatch =
+    data.type === "file" ? null : YOUTUBE_URL_REGEX.exec(data.external.url);
 
   const video =
     youtubeMatch === null
-      ? h('video', { src: url, controls: true, ...fileAttr }, [])
-      : h('iframe', { src: `https://youtube.com/embed/${youtubeMatch[5]}`, ...fileAttr }, []);
+      ? h("video", { src: url, controls: true, ...fileAttr }, [])
+      : h(
+          "iframe",
+          { src: `https://youtube.com/embed/${youtubeMatch[5]}`, ...fileAttr },
+          [],
+        );
 
-  const hast = h('div', { className: [blockClass] }, [video]);
+  const hast = h("div", { className: [blockClass] }, [video]);
   addCaptionToHast(context, hast, data.caption);
 
   return hast;

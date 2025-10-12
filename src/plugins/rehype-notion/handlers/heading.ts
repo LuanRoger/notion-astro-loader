@@ -1,12 +1,11 @@
-import { addTasksToAddRichTexts } from './rich-text';
-import { h, getColorClassName } from '../utils';
-
-import type { Context } from '../types';
+import type { Context } from "../types";
+import { getColorClassName, h } from "../utils";
+import { addTasksToAddRichTexts } from "./rich-text";
 
 const handler = (context: Context, block: any) => {
   const data = block[block.type];
 
-  const headingLevel = block.type.replace('heading_', '');
+  const headingLevel = block.type.replace("heading_", "");
 
   const colorClassName = getColorClassName(data.color);
   const className = colorClassName ? [colorClassName] : undefined;

@@ -1,7 +1,6 @@
-import { handleFootnotes, addTasksToAddHastChildren } from "./handlers/index";
-import { h } from "./utils";
-
+import { addTasksToAddHastChildren, handleFootnotes } from "./handlers/index";
 import type { Context, Options, Task } from "./types";
+import { h } from "./utils";
 
 export const notionToHast = (blocks: any[], options: Options) => {
   const tasks: Task[] = [];
@@ -19,7 +18,7 @@ export const notionToHast = (blocks: any[], options: Options) => {
 
   const context: Context = {
     options,
-    // @ts-ignore TS doesn't understand such an overload.
+    // @ts-expect-error TS doesn't understand such an overload.
     addTasks: (taskOrArray, iterItem) => {
       if (typeof taskOrArray === "function") {
         tasks.push(taskOrArray as Task);

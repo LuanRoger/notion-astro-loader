@@ -50,7 +50,7 @@ function extractTocHeadings(toc: HtmlElementNode): MarkdownHeading[] {
       let headings = [currentHeading];
       if (subList) {
         headings = headings.concat(
-          listElementToTree(subList as ListNode, depth + 1)
+          listElementToTree(subList as ListNode, depth + 1),
         );
       }
       return headings;
@@ -64,7 +64,7 @@ function extractTocHeadings(toc: HtmlElementNode): MarkdownHeading[] {
 function createProcessorWithPlugins(
   // biome-ignore lint/suspicious/noExplicitAny: It can be any rehype plugin
   rehypePlugins: ReadonlyArray<readonly [RehypePlugin, any]>,
-  onTocExtracted: (headings: MarkdownHeading[]) => void
+  onTocExtracted: (headings: MarkdownHeading[]) => void,
 ) {
   const baseWithToc = baseProcessor.use(rehypeToc, {
     customizeTOC(toc) {
@@ -76,7 +76,7 @@ function createProcessorWithPlugins(
 
   return rehypePlugins.reduce(
     (processor, [plugin, options]) => processor.use(plugin, options),
-    baseWithToc
+    baseWithToc,
   );
 }
 
@@ -84,7 +84,7 @@ async function processBlocks(
   // biome-ignore lint/suspicious/noExplicitAny: It can be any processor type
   processor: any,
   blocks: unknown[],
-  imagePaths: string[]
+  imagePaths: string[],
 ) {
   const processorWithImages = processor().use(rehypeImages(), { imagePaths });
 
@@ -97,14 +97,14 @@ async function processBlocks(
 
 export function buildProcessor(
   // biome-ignore lint/suspicious/noExplicitAny: It can be any rehype plugin
-  rehypePlugins: Promise<ReadonlyArray<readonly [RehypePlugin, any]>>
+  rehypePlugins: Promise<ReadonlyArray<readonly [RehypePlugin, any]>>,
 ) {
   let headings: MarkdownHeading[] = [];
 
   const processorPromise = rehypePlugins.then((plugins) =>
     createProcessorWithPlugins(plugins, (extractedHeadings) => {
       headings = extractedHeadings;
-    })
+    }),
   );
 
   return async function process(blocks: unknown[], imagePaths: string[]) {

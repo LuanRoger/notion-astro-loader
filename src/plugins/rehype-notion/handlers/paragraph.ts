@@ -1,8 +1,7 @@
-import handleRichText, { addTasksToAddRichTexts } from './rich-text';
-import { addTasksToAddWrappedChildren } from './children';
-import { h, getColorClassName, notionPrefixFactory } from '../utils';
-
-import { BlockType, type Context } from '../types';
+import { BlockType, type Context } from "../types";
+import { getColorClassName, h, notionPrefixFactory } from "../utils";
+import { addTasksToAddWrappedChildren } from "./children";
+import handleRichText, { addTasksToAddRichTexts } from "./rich-text";
 
 const handler = (context: Context, block: any) => {
   const data = block[BlockType.paragraph];
@@ -10,14 +9,17 @@ const handler = (context: Context, block: any) => {
   const richTextCount = data.rich_text?.length || 0;
 
   const shouldReturnRaw =
-    richTextCount === 1 && childrenCount < 1 && typeof context.options.convertRawHtml?.(data.rich_text[0]) === 'string';
+    richTextCount === 1 &&
+    childrenCount < 1 &&
+    typeof context.options.convertRawHtml?.(data.rich_text[0]) === "string";
   if (shouldReturnRaw) {
     return handleRichText(context, block, data.rich_text[0]);
   }
 
-  const shouldUseDivAsP = context.options.enableNestedParagraph && childrenCount > 0;
+  const shouldUseDivAsP =
+    context.options.enableNestedParagraph && childrenCount > 0;
 
-  const tagName = shouldUseDivAsP ? 'div' : 'p';
+  const tagName = shouldUseDivAsP ? "div" : "p";
 
   const className: string[] = [];
   if (shouldUseDivAsP) {
@@ -32,9 +34,9 @@ const handler = (context: Context, block: any) => {
     tagName,
     {
       className: className.length > 0 ? className : undefined,
-      role: shouldUseDivAsP ? 'paragraph' : undefined,
+      role: shouldUseDivAsP ? "paragraph" : undefined,
     },
-    []
+    [],
   );
 
   addTasksToAddWrappedChildren(context, hast, data.children);

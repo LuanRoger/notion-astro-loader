@@ -1,7 +1,6 @@
-import { addCaptionToHast } from './caption';
-import { h, getNotionFileUrlAndAttr, notionPrefixFactory } from '../utils';
-
-import { BlockType, type Context } from '../types';
+import { BlockType, type Context } from "../types";
+import { getNotionFileUrlAndAttr, h, notionPrefixFactory } from "../utils";
+import { addCaptionToHast } from "./caption";
 
 const handler = (context: Context, block: any) => {
   const data = block[BlockType.image];
@@ -9,7 +8,9 @@ const handler = (context: Context, block: any) => {
 
   const blockClass = notionPrefixFactory(context)(BlockType.image);
 
-  const hast = h('div', { className: [blockClass] }, [h('img', { src: url, ...fileAttr }, [])]);
+  const hast = h("div", { className: [blockClass] }, [
+    h("img", { src: url, ...fileAttr }, []),
+  ]);
   addCaptionToHast(context, hast, data.caption);
 
   return hast;
