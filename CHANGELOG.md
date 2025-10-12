@@ -1,3 +1,25 @@
+## [1.1.1] - 2025-10-12
+
+### 🚀 Features
+
+- Change plugin to merged one
+
+### 🚜 Refactor
+
+- Rename plugin folder to rehype-plugin
+- Rename folder to plugin name
+- Move to folder with plugin name
+
+### 🎨 Styling
+
+- Run Biome
+
+### ⚙️ Miscellaneous Tasks
+
+- Update CHANGELOG
+- Copy plugin to project
+- Remove submodule
+- Update lock file
 ## [1.1.0] - 2025-10-11
 
 ### 🚀 Features
