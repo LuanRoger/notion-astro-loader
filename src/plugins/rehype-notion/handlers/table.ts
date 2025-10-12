@@ -1,7 +1,7 @@
 import handleRichText from './rich-text';
 import { h, addBlockIdToHast } from '../utils';
 
-import { BlockType, Context } from '../types';
+import { BlockType, type Context } from '../types';
 
 const getTableCellHast = (
   context: Context,

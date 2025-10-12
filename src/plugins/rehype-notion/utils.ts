@@ -1,32 +1,44 @@
-import type { Root, RootContent, Element, ElementContent, Text } from 'hast';
+import type { Root, RootContent, Element, ElementContent, Text } from "hast";
 
-import { Context } from './types';
+import type { Context } from "./types";
 
-export function h(tagName: string, properties: Record<string, any>, children: ElementContent[]): Element;
+export function h(
+  tagName: string,
+  properties: Record<string, any>,
+  children: ElementContent[]
+): Element;
 export function h(tagName: string, children: ElementContent[]): Element;
 export function h(root: null, children: RootContent[]): Root;
-export function h(text: 'text', value: string): Text;
-export function h(raw: 'raw', value: string): Text;
+export function h(text: "text", value: string): Text;
+export function h(raw: "raw", value: string): Text;
 export function h(...args: any[]): Root | Element | Text {
   if (args[0] === null) {
-    return { type: 'root', children: args[1] };
+    return { type: "root", children: args[1] };
   }
-  if (['text', 'raw'].includes(args[0]) && typeof args[1] === 'string') {
+  if (["text", "raw"].includes(args[0]) && typeof args[1] === "string") {
     return { type: args[0], value: args[1] };
   }
   return Array.isArray(args[1])
-    ? { type: 'element', tagName: args[0], properties: {}, children: args[1] }
-    : { type: 'element', tagName: args[0], properties: args[1], children: args[2] };
+    ? { type: "element", tagName: args[0], properties: {}, children: args[1] }
+    : {
+        type: "element",
+        tagName: args[0],
+        properties: args[1],
+        children: args[2],
+      };
 }
 
 export const notionPrefixFactory = (context: Context) => {
-  const prefix = context.options.notionPrefix || 'notion-';
+  const prefix = context.options.notionPrefix || "notion-";
   return (str: string) => prefix + str;
 };
 
-export const getNotionFileUrlAndAttr = (context: Context, data: { type: string; [type: string]: string }) => {
+export const getNotionFileUrlAndAttr = (
+  context: Context,
+  data: { type: string; [type: string]: string }
+) => {
   const notionPrefix = notionPrefixFactory(context);
-  const attrName = `data-${notionPrefix('file-type')}`;
+  const attrName = `data-${notionPrefix("file-type")}`;
 
   const fileType = data.type;
 
@@ -35,25 +47,32 @@ export const getNotionFileUrlAndAttr = (context: Context, data: { type: string; 
 
 export const hasChildren = (data: any) => (data.children?.length || 0) > 0;
 
-export const addBlockIdToHast = (context: Context, block: any, hast: Element | Text) => {
-  if (hast.type !== 'element' || !context.options.enableBlockId || !block.id) {
+export const addBlockIdToHast = (
+  context: Context,
+  block: any,
+  hast: Element | Text
+) => {
+  if (hast.type !== "element" || !context.options.enableBlockId || !block.id) {
     return;
   }
 
   const notionPrefix = notionPrefixFactory(context);
-  const attrName = `data-${notionPrefix('block-id')}`;
+  const attrName = `data-${notionPrefix("block-id")}`;
 
   hast.properties = objAssign(hast.properties, { [attrName]: block.id });
 };
 
 export const getColorClassName = (color: string) => {
-  if (!color || color === 'default') {
-    return '';
+  if (!color || color === "default") {
+    return "";
   }
   return `color-${color}`;
 };
 
-export const objAssign = <T extends object, U>(props: T | undefined, newProps: U): T & U => {
+export const objAssign = <T extends object, U>(
+  props: T | undefined,
+  newProps: U
+): T & U => {
   return Object.assign((props || {}) as T, newProps);
 };
 
@@ -65,7 +84,11 @@ export const addClassToHast = (hast: Element, classItem: string) => {
   hast.properties = objAssign(hast.properties, { className: [classItem] });
 };
 
-const listItemTypes = new Set(['bulleted_list_item', 'numbered_list_item', 'to_do']);
+const listItemTypes = new Set([
+  "bulleted_list_item",
+  "numbered_list_item",
+  "to_do",
+]);
 
 export const groupBlocks = (blocks: any[] | undefined) => {
   const result: any[] = [];
@@ -74,11 +97,14 @@ export const groupBlocks = (blocks: any[] | undefined) => {
     return result;
   }
 
-  let curListItemType = '';
+  let curListItemType = "";
   let curListItems: any[] = [];
 
   const putListItemsToResult = () => {
-    const curListType = curListItemType === 'to_do' ? 'to_do_list' : curListItemType.replace('_item', '');
+    const curListType =
+      curListItemType === "to_do"
+        ? "to_do_list"
+        : curListItemType.replace("_item", "");
     result.push({ type: curListType, [curListType]: curListItems });
   };
 
@@ -89,7 +115,7 @@ export const groupBlocks = (blocks: any[] | undefined) => {
     if (!listItemTypes.has(block.type)) {
       if (curListItemType) {
         putListItemsToResult();
-        curListItemType = '';
+        curListItemType = "";
         curListItems = [];
       }
       result.push(block);
@@ -119,17 +145,22 @@ export const groupBlocks = (blocks: any[] | undefined) => {
   return result;
 };
 
-export const getFileDetails = (context: Context, block: any): { url?: string; attr?: object } => {
+export const getFileDetails = (
+  context: Context,
+  block: any
+): { url?: string; attr?: object } => {
   if (!block) return {};
 
   const notionPrefix = notionPrefixFactory(context);
   const fileType = block.type;
-  const attr = { [`data-${notionPrefix('file-type')}`]: fileType };
+  const attr = { [`data-${notionPrefix("file-type")}`]: fileType };
 
-  if (fileType === 'emoji') throw new TypeError('Emoji is not a file type');
+  if (fileType === "emoji") throw new TypeError("Emoji is not a file type");
 
   return { url: block[fileType].url, attr };
 };
 
-export const getFootnoteRefId = (index: number) => `user-content-fnref-${index}`;
-export const getFootnoteContentId = (index: number) => `user-content-fn-${index}`;
+export const getFootnoteRefId = (index: number) =>
+  `user-content-fnref-${index}`;
+export const getFootnoteContentId = (index: number) =>
+  `user-content-fn-${index}`;

@@ -2,7 +2,7 @@ import type { Plugin } from 'unified';
 import type { VFile } from 'vfile';
 
 import { notionToHast } from './notion-to-hast';
-import { Options } from './types';
+import type { Options } from './types';
 
 const notionRehype: Plugin<[Options]> = function (options) {
   this.Parser = (strFile: string, vFile: VFile) => {

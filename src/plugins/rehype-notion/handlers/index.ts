@@ -22,7 +22,7 @@ import handleLinkToPage from './link-to-page';
 import handleSyncedBlock from './synced-block';
 import handleTable from './table';
 
-import { BlockType, Context } from '../types';
+import { BlockType, type Context } from '../types';
 import { addBlockIdToHast } from '../utils';
 
 import handleFootnotes from './footnotes';

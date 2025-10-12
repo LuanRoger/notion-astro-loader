@@ -1,6 +1,6 @@
 import { h, notionPrefixFactory } from '../utils';
 
-import { BlockType, Context } from '../types';
+import { BlockType, type Context } from '../types';
 
 const handler = (context: Context, block: any) => {
   const data = block[BlockType.embed];

@@ -1,7 +1,7 @@
-import { handleFootnotes, addTasksToAddHastChildren } from './handlers/index';
-import { h } from './utils';
+import { handleFootnotes, addTasksToAddHastChildren } from "./handlers/index";
+import { h } from "./utils";
 
-import { Context, Options, Task } from './types';
+import type { Context, Options, Task } from "./types";
 
 export const notionToHast = (blocks: any[], options: Options) => {
   const tasks: Task[] = [];
@@ -10,7 +10,7 @@ export const notionToHast = (blocks: any[], options: Options) => {
   const { footnoteReference } = options;
   if (footnoteReference) {
     // shallow clone `footnoteReference`, to avoid problems when manipulating `footnoteReference` in place.
-    const newReference: Options['footnoteReference'] = {};
+    const newReference: Options["footnoteReference"] = {};
     for (const key in footnoteReference) {
       newReference[key] = [...footnoteReference[key]];
     }
@@ -21,7 +21,7 @@ export const notionToHast = (blocks: any[], options: Options) => {
     options,
     // @ts-ignore TS doesn't understand such an overload.
     addTasks: (taskOrArray, iterItem) => {
-      if (typeof taskOrArray === 'function') {
+      if (typeof taskOrArray === "function") {
         tasks.push(taskOrArray as Task);
         return;
       }

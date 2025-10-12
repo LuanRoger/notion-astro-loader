@@ -2,7 +2,7 @@ import type { Element, Text } from 'hast';
 
 import { h, getColorClassName, objAssign, getFootnoteRefId, getFootnoteContentId } from '../utils';
 
-import { Context } from '../types';
+import type { Context } from '../types';
 
 const getHastsWithBr = (text: string) => {
   const hasBreak = text.includes('\n');
@@ -43,6 +43,7 @@ const handler = (context: Context, block: any | null, richTextObj: any, turnLine
   const isFootnoteSign =
     annotations.code &&
     plain_text === '[^]' &&
+    // biome-ignore lint/suspicious/noAssignInExpressions: It's how the things work
     (footnoteRefs = block && context.options.footnoteReference?.[block.id]) &&
     footnoteRefs.length > 0;
 

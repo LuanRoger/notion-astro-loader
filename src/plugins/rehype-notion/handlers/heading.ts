@@ -1,7 +1,7 @@
 import { addTasksToAddRichTexts } from './rich-text';
 import { h, getColorClassName } from '../utils';
 
-import { Context } from '../types';
+import type { Context } from '../types';
 
 const handler = (context: Context, block: any) => {
   const data = block[block.type];

@@ -1,7 +1,7 @@
 import { h, addClassToHast, notionPrefixFactory } from '../utils';
 import handleRichText from './rich-text';
 
-import { Context } from '../types';
+import type { Context } from '../types';
 import type { Element } from 'hast';
 
 const handler = (context: Context, captionObjs: any[]) => {

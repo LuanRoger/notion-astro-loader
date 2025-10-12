@@ -1,7 +1,7 @@
 import handleRichText from './rich-text';
 import { h, getFootnoteRefId, getFootnoteContentId } from '../utils';
 
-import { Context } from '../types';
+import type { Context } from '../types';
 
 const getLiHast = (context: Context, footnote: any, count: number) => {
   const id = getFootnoteContentId(count);

@@ -3,7 +3,7 @@ import type { Element, Root } from 'hast';
 import { getBlockHast } from './index';
 import { h, notionPrefixFactory, groupBlocks } from '../utils';
 
-import { Context } from '../types';
+import type { Context } from '../types';
 
 export const addTasksToAddDirectChildren = (context: Context, hast: Element | Root, children: any[] | undefined) => {
   context.addTasks(groupBlocks(children), (child: any) => (ctx) => {

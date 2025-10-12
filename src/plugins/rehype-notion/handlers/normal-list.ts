@@ -2,7 +2,7 @@ import { addTasksToAddRichTexts } from './rich-text';
 import { addTasksToAddDirectChildren } from './children';
 import { h, getColorClassName, addBlockIdToHast, hasChildren } from '../utils';
 
-import { Context } from '../types';
+import type { Context } from '../types';
 
 const getListItemHast = (context: Context, block: any) => {
   const data = block[block.type];

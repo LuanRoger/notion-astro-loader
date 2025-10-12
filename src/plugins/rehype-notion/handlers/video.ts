@@ -1,7 +1,7 @@
 import { addCaptionToHast } from './caption';
 import { getFileDetails, h, notionPrefixFactory } from '../utils';
 
-import { Context } from '../types';
+import type { Context } from '../types';
 
 const YOUTUBE_URL_REGEX =
   /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?$/;
