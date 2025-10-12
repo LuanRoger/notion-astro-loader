@@ -5,12 +5,12 @@ import type {
 } from "@jsdevtools/rehype-toc";
 import rehypeToc from "@jsdevtools/rehype-toc";
 import type { MarkdownHeading } from "astro";
-import notionRehype from "notion-rehype";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import { type Plugin, unified } from "unified";
 import type { VFile } from "vfile";
 import { rehypeImages } from "../plugins/rehype-images";
+import notionRehype from "../plugins/rehype-notion";
 
 const baseProcessor = unified()
   .use(notionRehype, {})
