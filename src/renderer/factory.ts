@@ -15,7 +15,6 @@ import notionRehype from "../plugins/rehype-notion";
 const baseProcessor = unified()
   .use(notionRehype, {})
   .use(rehypeSlug)
-  //.use(rehypeKatex)
   .use(rehypeStringify);
 
 // biome-ignore lint/suspicious/noExplicitAny: It can be any rehype plugin
